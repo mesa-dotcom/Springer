@@ -12,7 +12,7 @@ namespace Springer
 {
     public partial class springer : Form
     {
-        string settingPath = Environment.CurrentDirectory + "/setting.txt";
+        string settingPath = Environment.CurrentDirectory + "/setting_secret_key.txt";
         Setting defaultSetting = new Setting();
         Setting currentSetting = new Setting();
         List<KeyValuePair<string, int>> LimitedDeviceNumber = new List<KeyValuePair<string, int>>()
@@ -28,6 +28,7 @@ namespace Springer
             new KeyValuePair<string, int>("CCTV", 5),
             new KeyValuePair<string, int>("PDA", 8)
         };
+        List<string> uniques = new List<string>() { "SC", "GW", "Printer", "GOT" };
         string[] stores;
         public springer()
         {
@@ -81,7 +82,6 @@ namespace Springer
 
         private void createForm()
         {
-            List<string> uniques = new List<string>() { "SC", "GW", "Printer", "GOT" };
             var rc = -2;
             var rr = -1;
             foreach (PropertyInfo prop in currentSetting.GetType().GetProperties())
@@ -165,6 +165,12 @@ namespace Springer
                 txtStore.Text = "";
             }
 
+        }
+
+        private void btnSetting_Click(object sender, EventArgs e)
+        {
+            SettingForm sf = new SettingForm();
+            sf.Show();
         }
     }
 }

@@ -8,8 +8,8 @@ namespace Springer.Models
 {
     internal class Setting
     {
-        public UniqueSetting SC { get; set; } = new UniqueSetting() { IsShow = true, IsCheck = true };
         public UniqueSetting GW { get; set; } = new UniqueSetting() { IsShow = true, IsCheck = false };
+        public UniqueSetting SC { get; set; } = new UniqueSetting() { IsShow = true, IsCheck = true };
         public UniqueSetting GOT { get; set; } = new UniqueSetting() { IsShow = false, IsCheck = false };
         public UniqueSetting Printer { get; set; } = new UniqueSetting() { IsShow = false, IsCheck = false };
         public MultiSetting POS { get; set; } = new MultiSetting() { IsShow = true, number = 3 };

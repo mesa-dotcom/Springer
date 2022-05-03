@@ -38,10 +38,10 @@
             this.gbDevices = new System.Windows.Forms.GroupBox();
             this.tlpTxt = new System.Windows.Forms.TableLayoutPanel();
             this.flpCheckboxes = new System.Windows.Forms.FlowLayoutPanel();
-            this.pbApp = new System.Windows.Forms.PictureBox();
-            this.btnSetting = new System.Windows.Forms.Button();
             this.lblApp = new System.Windows.Forms.Label();
             this.lblSlogan = new System.Windows.Forms.Label();
+            this.pbApp = new System.Windows.Forms.PictureBox();
+            this.btnSetting = new System.Windows.Forms.Button();
             this.gbStore.SuspendLayout();
             this.gbDevices.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbApp)).BeginInit();
@@ -53,10 +53,10 @@
             this.gbStore.Controls.Add(this.cbChooseGroup);
             this.gbStore.Controls.Add(this.txtStore);
             this.gbStore.Controls.Add(this.lblStore);
-            this.gbStore.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbStore.Location = new System.Drawing.Point(12, 111);
+            this.gbStore.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbStore.Location = new System.Drawing.Point(12, 116);
             this.gbStore.Name = "gbStore";
-            this.gbStore.Size = new System.Drawing.Size(775, 120);
+            this.gbStore.Size = new System.Drawing.Size(775, 124);
             this.gbStore.TabIndex = 0;
             this.gbStore.TabStop = false;
             this.gbStore.Text = "Select Store/Stores";
@@ -65,7 +65,7 @@
             // 
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnBrowse.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBrowse.Location = new System.Drawing.Point(626, 51);
+            this.btnBrowse.Location = new System.Drawing.Point(626, 59);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(121, 39);
             this.btnBrowse.TabIndex = 2;
@@ -77,7 +77,7 @@
             // 
             this.cbChooseGroup.AutoSize = true;
             this.cbChooseGroup.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbChooseGroup.Location = new System.Drawing.Point(10, 27);
+            this.cbChooseGroup.Location = new System.Drawing.Point(10, 31);
             this.cbChooseGroup.Name = "cbChooseGroup";
             this.cbChooseGroup.Size = new System.Drawing.Size(130, 23);
             this.cbChooseGroup.TabIndex = 1;
@@ -88,7 +88,7 @@
             // txtStore
             // 
             this.txtStore.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStore.Location = new System.Drawing.Point(206, 58);
+            this.txtStore.Location = new System.Drawing.Point(206, 66);
             this.txtStore.Name = "txtStore";
             this.txtStore.Size = new System.Drawing.Size(372, 30);
             this.txtStore.TabIndex = 1;
@@ -98,7 +98,7 @@
             // 
             this.lblStore.AutoSize = true;
             this.lblStore.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStore.Location = new System.Drawing.Point(6, 61);
+            this.lblStore.Location = new System.Drawing.Point(6, 69);
             this.lblStore.Name = "lblStore";
             this.lblStore.Size = new System.Drawing.Size(100, 19);
             this.lblStore.TabIndex = 0;
@@ -113,9 +113,9 @@
             this.gbDevices.Controls.Add(this.tlpTxt);
             this.gbDevices.Controls.Add(this.flpCheckboxes);
             this.gbDevices.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbDevices.Location = new System.Drawing.Point(12, 241);
+            this.gbDevices.Location = new System.Drawing.Point(12, 246);
             this.gbDevices.Name = "gbDevices";
-            this.gbDevices.Size = new System.Drawing.Size(775, 260);
+            this.gbDevices.Size = new System.Drawing.Size(775, 284);
             this.gbDevices.TabIndex = 1;
             this.gbDevices.TabStop = false;
             this.gbDevices.Text = "Devices";
@@ -133,7 +133,7 @@
             this.tlpTxt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpTxt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpTxt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlpTxt.Size = new System.Drawing.Size(763, 178);
+            this.tlpTxt.Size = new System.Drawing.Size(763, 199);
             this.tlpTxt.TabIndex = 5;
             // 
             // flpCheckboxes
@@ -142,6 +142,26 @@
             this.flpCheckboxes.Name = "flpCheckboxes";
             this.flpCheckboxes.Size = new System.Drawing.Size(763, 41);
             this.flpCheckboxes.TabIndex = 4;
+            // 
+            // lblApp
+            // 
+            this.lblApp.AutoSize = true;
+            this.lblApp.Font = new System.Drawing.Font("Pristina", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblApp.Location = new System.Drawing.Point(100, 16);
+            this.lblApp.Name = "lblApp";
+            this.lblApp.Size = new System.Drawing.Size(107, 37);
+            this.lblApp.TabIndex = 4;
+            this.lblApp.Text = "Springer";
+            // 
+            // lblSlogan
+            // 
+            this.lblSlogan.AutoSize = true;
+            this.lblSlogan.Font = new System.Drawing.Font("Parchment", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSlogan.Location = new System.Drawing.Point(106, 57);
+            this.lblSlogan.Name = "lblSlogan";
+            this.lblSlogan.Size = new System.Drawing.Size(116, 24);
+            this.lblSlogan.TabIndex = 5;
+            this.lblSlogan.Text = "get closer to the store";
             // 
             // pbApp
             // 
@@ -160,32 +180,13 @@
             this.btnSetting.Size = new System.Drawing.Size(61, 57);
             this.btnSetting.TabIndex = 2;
             this.btnSetting.UseVisualStyleBackColor = true;
-            // 
-            // lblApp
-            // 
-            this.lblApp.AutoSize = true;
-            this.lblApp.Font = new System.Drawing.Font("Pristina", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblApp.Location = new System.Drawing.Point(100, 16);
-            this.lblApp.Name = "lblApp";
-            this.lblApp.Size = new System.Drawing.Size(99, 37);
-            this.lblApp.TabIndex = 4;
-            this.lblApp.Text = "Springer";
-            // 
-            // lblSlogan
-            // 
-            this.lblSlogan.AutoSize = true;
-            this.lblSlogan.Font = new System.Drawing.Font("Parchment", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSlogan.Location = new System.Drawing.Point(106, 57);
-            this.lblSlogan.Name = "lblSlogan";
-            this.lblSlogan.Size = new System.Drawing.Size(93, 24);
-            this.lblSlogan.TabIndex = 5;
-            this.lblSlogan.Text = "get closer to the store";
+            this.btnSetting.Click += new System.EventHandler(this.btnSetting_Click);
             // 
             // springer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(799, 625);
+            this.ClientSize = new System.Drawing.Size(799, 552);
             this.Controls.Add(this.lblSlogan);
             this.Controls.Add(this.lblApp);
             this.Controls.Add(this.pbApp);
@@ -193,6 +194,7 @@
             this.Controls.Add(this.gbDevices);
             this.Controls.Add(this.gbStore);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "springer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Springer";
