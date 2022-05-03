@@ -128,10 +128,8 @@ namespace Springer
         private void deviceCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox chkb = (CheckBox) sender;
-            if (!chkb.Checked)
-            {
-                
-            }
+            ComboBox cb = Controls.Find("cbb" + chkb.Text, true).FirstOrDefault() as ComboBox;
+            cb.Enabled = chkb.Checked;
         }
 
         private void cbChooseGroup_CheckedChanged(object sender, EventArgs e)

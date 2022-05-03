@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(springer));
             this.gbStore = new System.Windows.Forms.GroupBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.cbChooseGroup = new System.Windows.Forms.CheckBox();
@@ -35,10 +36,15 @@
             this.lblStore = new System.Windows.Forms.Label();
             this.ofdChooseGroup = new System.Windows.Forms.OpenFileDialog();
             this.gbDevices = new System.Windows.Forms.GroupBox();
-            this.flpCheckboxes = new System.Windows.Forms.FlowLayoutPanel();
             this.tlpTxt = new System.Windows.Forms.TableLayoutPanel();
+            this.flpCheckboxes = new System.Windows.Forms.FlowLayoutPanel();
+            this.pbApp = new System.Windows.Forms.PictureBox();
+            this.btnSetting = new System.Windows.Forms.Button();
+            this.lblApp = new System.Windows.Forms.Label();
+            this.lblSlogan = new System.Windows.Forms.Label();
             this.gbStore.SuspendLayout();
             this.gbDevices.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbApp)).BeginInit();
             this.SuspendLayout();
             // 
             // gbStore
@@ -48,7 +54,7 @@
             this.gbStore.Controls.Add(this.txtStore);
             this.gbStore.Controls.Add(this.lblStore);
             this.gbStore.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbStore.Location = new System.Drawing.Point(12, 12);
+            this.gbStore.Location = new System.Drawing.Point(12, 111);
             this.gbStore.Name = "gbStore";
             this.gbStore.Size = new System.Drawing.Size(775, 120);
             this.gbStore.TabIndex = 0;
@@ -107,19 +113,12 @@
             this.gbDevices.Controls.Add(this.tlpTxt);
             this.gbDevices.Controls.Add(this.flpCheckboxes);
             this.gbDevices.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbDevices.Location = new System.Drawing.Point(12, 138);
+            this.gbDevices.Location = new System.Drawing.Point(12, 241);
             this.gbDevices.Name = "gbDevices";
             this.gbDevices.Size = new System.Drawing.Size(775, 260);
             this.gbDevices.TabIndex = 1;
             this.gbDevices.TabStop = false;
             this.gbDevices.Text = "Devices";
-            // 
-            // flpCheckboxes
-            // 
-            this.flpCheckboxes.Location = new System.Drawing.Point(6, 29);
-            this.flpCheckboxes.Name = "flpCheckboxes";
-            this.flpCheckboxes.Size = new System.Drawing.Size(763, 41);
-            this.flpCheckboxes.TabIndex = 4;
             // 
             // tlpTxt
             // 
@@ -137,20 +136,72 @@
             this.tlpTxt.Size = new System.Drawing.Size(763, 178);
             this.tlpTxt.TabIndex = 5;
             // 
+            // flpCheckboxes
+            // 
+            this.flpCheckboxes.Location = new System.Drawing.Point(6, 29);
+            this.flpCheckboxes.Name = "flpCheckboxes";
+            this.flpCheckboxes.Size = new System.Drawing.Size(763, 41);
+            this.flpCheckboxes.TabIndex = 4;
+            // 
+            // pbApp
+            // 
+            this.pbApp.Image = global::Springer.Properties.Resources.flowers__2_;
+            this.pbApp.Location = new System.Drawing.Point(12, 12);
+            this.pbApp.Name = "pbApp";
+            this.pbApp.Size = new System.Drawing.Size(82, 78);
+            this.pbApp.TabIndex = 3;
+            this.pbApp.TabStop = false;
+            // 
+            // btnSetting
+            // 
+            this.btnSetting.Image = global::Springer.Properties.Resources.mechanical_gears___1_;
+            this.btnSetting.Location = new System.Drawing.Point(726, 17);
+            this.btnSetting.Name = "btnSetting";
+            this.btnSetting.Size = new System.Drawing.Size(61, 57);
+            this.btnSetting.TabIndex = 2;
+            this.btnSetting.UseVisualStyleBackColor = true;
+            // 
+            // lblApp
+            // 
+            this.lblApp.AutoSize = true;
+            this.lblApp.Font = new System.Drawing.Font("Pristina", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblApp.Location = new System.Drawing.Point(100, 16);
+            this.lblApp.Name = "lblApp";
+            this.lblApp.Size = new System.Drawing.Size(99, 37);
+            this.lblApp.TabIndex = 4;
+            this.lblApp.Text = "Springer";
+            // 
+            // lblSlogan
+            // 
+            this.lblSlogan.AutoSize = true;
+            this.lblSlogan.Font = new System.Drawing.Font("Parchment", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSlogan.Location = new System.Drawing.Point(106, 57);
+            this.lblSlogan.Name = "lblSlogan";
+            this.lblSlogan.Size = new System.Drawing.Size(93, 24);
+            this.lblSlogan.TabIndex = 5;
+            this.lblSlogan.Text = "get closer to the store";
+            // 
             // springer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(799, 625);
+            this.Controls.Add(this.lblSlogan);
+            this.Controls.Add(this.lblApp);
+            this.Controls.Add(this.pbApp);
+            this.Controls.Add(this.btnSetting);
             this.Controls.Add(this.gbDevices);
             this.Controls.Add(this.gbStore);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "springer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Springer";
             this.gbStore.ResumeLayout(false);
             this.gbStore.PerformLayout();
             this.gbDevices.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbApp)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -165,6 +216,10 @@
         private System.Windows.Forms.GroupBox gbDevices;
         private System.Windows.Forms.FlowLayoutPanel flpCheckboxes;
         private System.Windows.Forms.TableLayoutPanel tlpTxt;
+        private System.Windows.Forms.Button btnSetting;
+        private System.Windows.Forms.PictureBox pbApp;
+        private System.Windows.Forms.Label lblApp;
+        private System.Windows.Forms.Label lblSlogan;
     }
 }
 
