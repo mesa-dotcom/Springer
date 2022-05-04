@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(springer));
             this.gbStore = new System.Windows.Forms.GroupBox();
+            this.cbSameDir = new System.Windows.Forms.CheckBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.cbChooseGroup = new System.Windows.Forms.CheckBox();
             this.txtStore = new System.Windows.Forms.RichTextBox();
@@ -42,6 +43,8 @@
             this.lblSlogan = new System.Windows.Forms.Label();
             this.pbApp = new System.Windows.Forms.PictureBox();
             this.btnSetting = new System.Windows.Forms.Button();
+            this.btnClearForm = new System.Windows.Forms.Button();
+            this.btnPing = new System.Windows.Forms.Button();
             this.gbStore.SuspendLayout();
             this.gbDevices.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbApp)).BeginInit();
@@ -49,6 +52,7 @@
             // 
             // gbStore
             // 
+            this.gbStore.Controls.Add(this.cbSameDir);
             this.gbStore.Controls.Add(this.btnBrowse);
             this.gbStore.Controls.Add(this.cbChooseGroup);
             this.gbStore.Controls.Add(this.txtStore);
@@ -60,6 +64,18 @@
             this.gbStore.TabIndex = 0;
             this.gbStore.TabStop = false;
             this.gbStore.Text = "Select Store/Stores";
+            // 
+            // cbSameDir
+            // 
+            this.cbSameDir.AutoSize = true;
+            this.cbSameDir.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbSameDir.Location = new System.Drawing.Point(168, 31);
+            this.cbSameDir.Name = "cbSameDir";
+            this.cbSameDir.Size = new System.Drawing.Size(135, 23);
+            this.cbSameDir.TabIndex = 3;
+            this.cbSameDir.Text = "Same directory";
+            this.cbSameDir.UseVisualStyleBackColor = true;
+            this.cbSameDir.CheckedChanged += new System.EventHandler(this.cbSameDir_CheckedChanged);
             // 
             // btnBrowse
             // 
@@ -182,11 +198,35 @@
             this.btnSetting.UseVisualStyleBackColor = true;
             this.btnSetting.Click += new System.EventHandler(this.btnSetting_Click);
             // 
+            // btnClearForm
+            // 
+            this.btnClearForm.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearForm.Location = new System.Drawing.Point(253, 536);
+            this.btnClearForm.Name = "btnClearForm";
+            this.btnClearForm.Size = new System.Drawing.Size(106, 38);
+            this.btnClearForm.TabIndex = 6;
+            this.btnClearForm.Text = "Clear Form";
+            this.btnClearForm.UseVisualStyleBackColor = true;
+            this.btnClearForm.Click += new System.EventHandler(this.btnClearForm_Click);
+            // 
+            // btnPing
+            // 
+            this.btnPing.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPing.Location = new System.Drawing.Point(434, 536);
+            this.btnPing.Name = "btnPing";
+            this.btnPing.Size = new System.Drawing.Size(106, 38);
+            this.btnPing.TabIndex = 7;
+            this.btnPing.Text = "Start Ping";
+            this.btnPing.UseVisualStyleBackColor = true;
+            this.btnPing.Click += new System.EventHandler(this.btnPing_Click);
+            // 
             // springer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(799, 552);
+            this.ClientSize = new System.Drawing.Size(799, 586);
+            this.Controls.Add(this.btnPing);
+            this.Controls.Add(this.btnClearForm);
             this.Controls.Add(this.lblSlogan);
             this.Controls.Add(this.lblApp);
             this.Controls.Add(this.pbApp);
@@ -222,6 +262,9 @@
         private System.Windows.Forms.PictureBox pbApp;
         private System.Windows.Forms.Label lblApp;
         private System.Windows.Forms.Label lblSlogan;
+        private System.Windows.Forms.CheckBox cbSameDir;
+        private System.Windows.Forms.Button btnClearForm;
+        private System.Windows.Forms.Button btnPing;
     }
 }
 

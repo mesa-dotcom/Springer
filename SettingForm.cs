@@ -95,8 +95,8 @@ namespace Springer
                     Byte[] data = new UTF8Encoding(true).GetBytes(str);
                     fs.Write(data, 0, data.Length);
                     File.SetAttributes(settingPath, FileAttributes.Hidden);
-                    this.Close();
                 }
+                this.Close();
             }
             catch (Exception)
             {

@@ -137,15 +137,30 @@ namespace Springer
             txtStore.Text = "";
             if (cbChooseGroup.Checked)
             {
+                cbSameDir.Enabled = true;
                 txtStore.Enabled = false;
                 btnBrowse.Enabled = true;
             } else
             {
+                cbSameDir.Checked = false;
+                cbSameDir.Enabled = false;
                 txtStore.Enabled = true;
                 btnBrowse.Enabled = false;
             }
         }
-       
+
+        private void cbSameDir_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbSameDir.Checked)
+            {
+                this.btnBrowse.Enabled = false;
+                this.txtStore.Text = "";
+            } else
+            {
+                this.btnBrowse.Enabled = true;
+            }
+        }
+
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -169,8 +184,49 @@ namespace Springer
 
         private void btnSetting_Click(object sender, EventArgs e)
         {
+            Enabled = false;
             SettingForm sf = new SettingForm();
+            sf.FormClosing += new FormClosingEventHandler(this.settingForm_FormClosing);
             sf.Show();
+        }
+
+        private void settingForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Enabled = true;
+            cbChooseGroup.Checked = true;
+            cbSameDir.Checked = false;
+            txtStore.Enabled = false;
+            btnBrowse.Enabled = true;
+            readSettingFile();
+            flpCheckboxes.Controls.Clear();
+            tlpTxt.Controls.Clear();
+            createForm();
+        }
+
+        private void btnClearForm_Click(object sender, EventArgs e)
+        {
+            cbSameDir.Checked = false;
+            foreach (Control ctrl in flpCheckboxes.Controls)
+            {
+                if (ctrl.Name.Contains("cb"))
+                {
+                    CheckBox cb = (CheckBox)ctrl;
+                    cb.Checked = false;
+                }
+            }
+            foreach (Control ctrl in tlpTxt.Controls)
+            {
+                if (ctrl.Name.Contains("cb") && !ctrl.Name.Contains("cbb"))
+                {
+                    CheckBox cb = (CheckBox)ctrl;
+                    cb.Checked = false;
+                }
+            }
+        }
+
+        private void btnPing_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
