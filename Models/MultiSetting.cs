@@ -9,6 +9,6 @@ namespace Springer.Models
     internal class MultiSetting
     {
         public bool IsShow { get; set; }
-        public int number { get; set; }
+        public int Number { get; set; }
     }
 }

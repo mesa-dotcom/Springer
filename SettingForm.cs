@@ -56,7 +56,7 @@ namespace Springer
                             CheckBox cbs = (CheckBox) Controls.Find("cbs" + prop.Name, true).FirstOrDefault();
                             cbs.Checked = device.IsShow;
                             NumericUpDown nud = Controls.Find("nud" + prop.Name, true).FirstOrDefault() as NumericUpDown;
-                            nud.Value = device.number;
+                            nud.Value = device.Number;
                         }
                     }
                 }
@@ -85,7 +85,7 @@ namespace Springer
                     {
                         CheckBox cbs = (CheckBox) Controls.Find("cbs" + prop.Name, true).FirstOrDefault();
                         NumericUpDown nud = (NumericUpDown)Controls.Find("nud" + prop.Name, true).FirstOrDefault();
-                        prop.SetValue(newSetting, new MultiSetting() { IsShow = cbs.Checked, number = (int) nud.Value}, null);
+                        prop.SetValue(newSetting, new MultiSetting() { IsShow = cbs.Checked, Number = (int) nud.Value}, null);
                     }
                 }
                 string str = JsonConvert.SerializeObject(newSetting);

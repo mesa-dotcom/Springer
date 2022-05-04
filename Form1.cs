@@ -117,7 +117,7 @@ namespace Springer
                         {
                             cbb.Items.Add(i);
                         }
-                        cbb.SelectedItem = device.number;
+                        cbb.SelectedItem = device.Number;
                         //NumericUpDown nud = new NumericUpDown() { Name = "txt" + prop.Name, Text = device.number.ToString(), Maximum = LimitedDeviceNumber.Find(k => k.Key == prop.Name).Value };
                         tlpTxt.Controls.Add(cbb, rc % 4 + 1, rr);
                     }
@@ -226,7 +226,99 @@ namespace Springer
 
         private void btnPing_Click(object sender, EventArgs e)
         {
+            List<string> storeIds = getStoreIds();
+            List<KeyValuePair<string, List<Device>>> allData = new List<KeyValuePair<string, List<Device>>>();
+            foreach (string storeId in storeIds)
+            {
+                List<Device> ld = new List<Device>();
+                string domain = $"10{storeId.Substring(0, 1)}.1{storeId.Substring(1, 2)}.1{storeId.Substring(3, 2)}";
+                foreach (CheckBox ctrl in flpCheckboxes.Controls)
+                {
+                    if (ctrl.Name.Contains("cb"))
+                    {
+                        ld.Add(new Device()
+                        {
+                            Name = ctrl.Text,
+                            No = null,
+                            IP = getIP(domain, ctrl.Text)
+                        }) ;
+                    }
+                }
+                foreach (Control ctrl in tlpTxt.Controls)
+                {
+                    if (ctrl.Name.Contains("cbb"))
+                    {
+                        string n = ctrl.Name.Remove(0, 3);
+                        string ip = getIP(domain, ctrl.Name.Remove(0, 3), ctrl.Text);
+                        ld.Add(new Device()
+                        {
+                            Name = n,
+                            No = ctrl.Text,
+                            IP = ip
+                        });
+                    }
+                }
+                allData.Add(new KeyValuePair<string, List<Device>>(storeId, ld));
+            }
+            ResultForm rf = new ResultForm(allData);
+            rf.Show();
+        }
 
+        private List<string> getStoreIds()
+        {
+            List<string> storeIds = new List<string>();
+            try
+            {
+                if (cbChooseGroup.Checked)
+                {
+                    string storePath = cbSameDir.Checked ? Environment.CurrentDirectory + "/Node.txt" : txtStore.Text;
+                    using (StreamReader sr = File.OpenText(storePath))
+                    {
+                        while (sr.Peek()> 0)
+                        {
+                            storeIds.Add(sr.ReadLine());
+                        }
+                    }
+                }
+                else
+                {
+                    storeIds = txtStore.Text.Split(',').ToList();
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            return storeIds;
+        }
+
+        private string getIP(string domain,string deviceName, string no = "" )
+        {
+            switch (deviceName)
+            {
+                case "GW":
+                    return domain + ".110";
+                case "SC":
+                    return domain + ".119";
+                case "GOT":
+                    return domain + ".146";
+                case "Printer":
+                    return domain + ".121";
+                case "POS":
+                    return $"{domain}.11{no}";
+                case "AP":
+                    return $"{domain}.10{no}";
+                case "PDA":
+                    return $"{domain}.13{no}";
+                case "UPS":
+                    return $"{domain}.{96 + no}";
+                case "EDC":
+                    return $"{domain}.{208 + no}";
+                case "CCTV":
+                    return $"{domain}.{8 + no}";
+                default:
+                    return domain + ".110";
+            }
         }
     }
 }
