@@ -186,15 +186,13 @@ namespace Springer
 
         private void btnSetting_Click(object sender, EventArgs e)
         {
-            Enabled = false;
             SettingForm sf = new SettingForm();
             sf.FormClosing += new FormClosingEventHandler(this.settingForm_FormClosing);
-            sf.Show();
+            sf.ShowDialog();
         }
 
         private void settingForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Enabled = true;
             cbChooseGroup.Checked = true;
             cbSameDir.Checked = false;
             txtStore.Enabled = false;
@@ -283,7 +281,7 @@ namespace Springer
                     allData.Add(new KeyValuePair<string, List<Device>>(storeId, ld));
                 }
                 ResultForm rf = new ResultForm(allData, allDevices);
-                rf.Show();
+                rf.ShowDialog();
             }
             catch (Exception exc)
             {
