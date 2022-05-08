@@ -44,18 +44,27 @@ namespace Springer
             {
                 var storeId = store.Key;
                 var devices = store.Value;
-                bool gwIpRes = await PingIp($"11{storeId.Substring(0, 1)}.1{storeId.Substring(1, 2)}.1{storeId.Substring(3, 2)}.110");
-                //List<string> gwIpRes = await PingIp("127.0.0.1");
-                if (gwIpRes)
+                var gwIpRes = await PingIp($"11{storeId.Substring(0, 1)}.1{storeId.Substring(1, 2)}.1{storeId.Substring(3, 2)}.110");
+                if (gwIpRes.isSuccess)
                 {
-                    Device gw = (Device) devices.Find(D => D.Name == "GW");
+                    Device gw = devices.Find(D => D.Name == "GW");
                     if (gw != null)
                     {
                         gw.IsAlive = true;
                         AddRowToDT(gw);
                         devices.Remove(gw);
                     }
-                } else
+                    for (int i = 0; i < devices.Count(); i++)
+                    {
+                        var dRes = await PingIp(devices[i].IP, i);
+                        if (dRes.isSuccess)
+                        {
+                            devices[i].IsAlive = true;
+                        }
+                        AddRowToDT(devices[i]);
+                    }
+                }
+                else
                 {
                     devices.ForEach(d =>
                     {
@@ -76,9 +85,10 @@ namespace Springer
             dr["Status"] = d.IsAlive ? "Success" : "Timeout";
             dt.Rows.Add(dr);
             pgbResult.Increment(1);
+            CheckProgressBarFull();
         }
 
-        private async Task<bool> PingIp(string ip)
+        private async Task<(bool isSuccess, int index)> PingIp(string ip, int index = 0)
         {
             List<string> results = new List<string>();
             for (int i = 0; i < 4; i++)
@@ -87,12 +97,21 @@ namespace Springer
                 results.Add(prl.Status.ToString());
             }
             int s = results.Where(S => S.Equals("Success")).Count();
-            return  s > QualifiedSuccess;
+            return  (s > QualifiedSuccess, index);
         }
 
         private void ResultForm_Load(object sender, EventArgs e)
         {
             startPing();
+        }
+
+        private void CheckProgressBarFull()
+        {
+            if (pgbResult.Value == pgbResult.Maximum)
+            {
+                btnExcel.Enabled = true;
+                lblProgress.Text = "Pinging is Done!";
+            }
         }
 
         private void dgwResult_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

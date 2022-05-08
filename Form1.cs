@@ -236,7 +236,7 @@ namespace Springer
                 foreach (string storeId in storeIds)
                 {
                     List<Device> ld = new List<Device>();
-                    string domain = $"10{storeId.Substring(0, 1)}.1{storeId.Substring(1, 2)}.1{storeId.Substring(3, 2)}";
+                    string domain = $"11{storeId.Substring(0, 1)}.1{storeId.Substring(1, 2)}.1{storeId.Substring(3, 2)}";
                     foreach (string n in uniques)
                     {
                         CheckBox cb = (CheckBox)Controls.Find("cb" + n, true).FirstOrDefault();
