@@ -71,9 +71,9 @@
             this.cbSameDir.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbSameDir.Location = new System.Drawing.Point(168, 31);
             this.cbSameDir.Name = "cbSameDir";
-            this.cbSameDir.Size = new System.Drawing.Size(135, 23);
+            this.cbSameDir.Size = new System.Drawing.Size(206, 23);
             this.cbSameDir.TabIndex = 3;
-            this.cbSameDir.Text = "Same directory";
+            this.cbSameDir.Text = "Same directory (node.txt)";
             this.cbSameDir.UseVisualStyleBackColor = true;
             this.cbSameDir.CheckedChanged += new System.EventHandler(this.cbSameDir_CheckedChanged);
             // 
@@ -104,9 +104,9 @@
             // txtStore
             // 
             this.txtStore.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStore.Location = new System.Drawing.Point(206, 66);
+            this.txtStore.Location = new System.Drawing.Point(168, 66);
             this.txtStore.Name = "txtStore";
-            this.txtStore.Size = new System.Drawing.Size(372, 30);
+            this.txtStore.Size = new System.Drawing.Size(410, 30);
             this.txtStore.TabIndex = 1;
             this.txtStore.Text = "";
             // 
@@ -162,22 +162,22 @@
             // lblApp
             // 
             this.lblApp.AutoSize = true;
-            this.lblApp.Font = new System.Drawing.Font("Pristina", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblApp.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblApp.Location = new System.Drawing.Point(100, 16);
             this.lblApp.Name = "lblApp";
-            this.lblApp.Size = new System.Drawing.Size(107, 37);
+            this.lblApp.Size = new System.Drawing.Size(99, 25);
             this.lblApp.TabIndex = 4;
             this.lblApp.Text = "Springer";
             // 
             // lblSlogan
             // 
             this.lblSlogan.AutoSize = true;
-            this.lblSlogan.Font = new System.Drawing.Font("Parchment", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSlogan.Location = new System.Drawing.Point(106, 57);
+            this.lblSlogan.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSlogan.Location = new System.Drawing.Point(101, 51);
             this.lblSlogan.Name = "lblSlogan";
-            this.lblSlogan.Size = new System.Drawing.Size(116, 24);
+            this.lblSlogan.Size = new System.Drawing.Size(175, 19);
             this.lblSlogan.TabIndex = 5;
-            this.lblSlogan.Text = "get closer to the store";
+            this.lblSlogan.Text = "Get closer to the store";
             // 
             // pbApp
             // 
@@ -233,6 +233,7 @@
             this.Controls.Add(this.btnSetting);
             this.Controls.Add(this.gbDevices);
             this.Controls.Add(this.gbStore);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "springer";

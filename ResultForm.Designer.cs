@@ -28,52 +28,68 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.pgbResult = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
-            this.dtgwDevice = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgwDevice)).BeginInit();
+            this.btnExcel = new System.Windows.Forms.Button();
+            this.dgwResult = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwResult)).BeginInit();
             this.SuspendLayout();
             // 
-            // progressBar1
+            // pgbResult
             // 
-            this.progressBar1.Location = new System.Drawing.Point(188, 74);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(415, 23);
-            this.progressBar1.TabIndex = 0;
+            this.pgbResult.Location = new System.Drawing.Point(12, 70);
+            this.pgbResult.Name = "pgbResult";
+            this.pgbResult.Size = new System.Drawing.Size(581, 35);
+            this.pgbResult.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(347, 31);
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(245, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 16);
+            this.label1.Size = new System.Drawing.Size(76, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "Progessing...";
             // 
-            // dtgwDevice
+            // btnExcel
             // 
-            this.dtgwDevice.AllowUserToAddRows = false;
-            this.dtgwDevice.AllowUserToDeleteRows = false;
-            this.dtgwDevice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgwDevice.Location = new System.Drawing.Point(12, 129);
-            this.dtgwDevice.Name = "dtgwDevice";
-            this.dtgwDevice.ReadOnly = true;
-            this.dtgwDevice.RowHeadersWidth = 51;
-            this.dtgwDevice.RowTemplate.Height = 24;
-            this.dtgwDevice.Size = new System.Drawing.Size(776, 309);
-            this.dtgwDevice.TabIndex = 2;
+            this.btnExcel.Enabled = false;
+            this.btnExcel.Location = new System.Drawing.Point(599, 70);
+            this.btnExcel.Name = "btnExcel";
+            this.btnExcel.Size = new System.Drawing.Size(151, 35);
+            this.btnExcel.TabIndex = 2;
+            this.btnExcel.Text = "Export Excel";
+            this.btnExcel.UseVisualStyleBackColor = true;
+            // 
+            // dgwResult
+            // 
+            this.dgwResult.AllowUserToDeleteRows = false;
+            this.dgwResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgwResult.Location = new System.Drawing.Point(13, 111);
+            this.dgwResult.Name = "dgwResult";
+            this.dgwResult.ReadOnly = true;
+            this.dgwResult.RowHeadersWidth = 51;
+            this.dgwResult.RowTemplate.Height = 24;
+            this.dgwResult.Size = new System.Drawing.Size(737, 383);
+            this.dgwResult.TabIndex = 3;
+            this.dgwResult.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgwResult_CellFormatting);
             // 
             // ResultForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dtgwDevice);
+            this.ClientSize = new System.Drawing.Size(762, 506);
+            this.Controls.Add(this.dgwResult);
+            this.Controls.Add(this.btnExcel);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.pgbResult);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "ResultForm";
             this.Text = "ResultForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dtgwDevice)).EndInit();
+            this.Load += new System.EventHandler(this.ResultForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgwResult)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -81,8 +97,9 @@
 
         #endregion
 
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ProgressBar pgbResult;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dtgwDevice;
+        private System.Windows.Forms.Button btnExcel;
+        private System.Windows.Forms.DataGridView dgwResult;
     }
 }

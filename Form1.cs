@@ -28,7 +28,8 @@ namespace Springer
             new KeyValuePair<string, int>("CCTV", 5),
             new KeyValuePair<string, int>("PDA", 8)
         };
-        List<string> uniques = new List<string>() { "SC", "GW", "Printer", "GOT" };
+        List<string> uniques = new List<string>() { "GW", "SC", "Printer", "GOT" };
+        List<string> multi = new List<string>() { "POS", "AP", "PDA", "CCTV", "EDC", "UPS" };
         string[] stores;
         public springer()
         {
@@ -110,7 +111,8 @@ namespace Springer
                             rr++;
                         }
                         CheckBox cb = new CheckBox() { Name = "cb" + prop.Name, Text = prop.Name, Checked = true };
-                        cb.CheckedChanged += new EventHandler(deviceCheckbox_CheckedChanged);                        tlpTxt.Controls.Add(cb, rc % 4, rr);
+                        cb.CheckedChanged += new EventHandler(deviceCheckbox_CheckedChanged);
+                        tlpTxt.Controls.Add(cb, rc % 4, rr);
                         var lnd = LimitedDeviceNumber.Find(k => k.Key == prop.Name).Value;
                         ComboBox cbb = new ComboBox() { Name = "cbb" + prop.Name };
                         for (int i = 1; i <= lnd; i++)
@@ -226,49 +228,72 @@ namespace Springer
 
         private void btnPing_Click(object sender, EventArgs e)
         {
-            List<string> storeIds = getStoreIds();
-            List<KeyValuePair<string, List<Device>>> allData = new List<KeyValuePair<string, List<Device>>>();
-            foreach (string storeId in storeIds)
+            try
             {
-                List<Device> ld = new List<Device>();
-                string domain = $"10{storeId.Substring(0, 1)}.1{storeId.Substring(1, 2)}.1{storeId.Substring(3, 2)}";
-                foreach (CheckBox ctrl in flpCheckboxes.Controls)
+                List<string> storeIds = getStoreIds();
+                List<KeyValuePair<string, List<Device>>> allData = new List<KeyValuePair<string, List<Device>>>();
+                List<Device> allDevices = new List<Device>();
+                foreach (string storeId in storeIds)
                 {
-                    if (ctrl.Name.Contains("cb"))
+                    List<Device> ld = new List<Device>();
+                    string domain = $"10{storeId.Substring(0, 1)}.1{storeId.Substring(1, 2)}.1{storeId.Substring(3, 2)}";
+                    foreach (string n in uniques)
                     {
-                        ld.Add(new Device()
+                        CheckBox cb = (CheckBox)Controls.Find("cb" + n, true).FirstOrDefault();
+                        if (cb != null && cb.Checked)
                         {
-                            Name = ctrl.Text,
-                            No = null,
-                            IP = getIP(domain, ctrl.Text)
-                        }) ;
+                            ld.Add(new Device()
+                            {
+                                Name = cb.Text,
+                                No = null,
+                                IP = getIP(domain, cb.Text),
+                                StoreId = storeId,
+                            });
+                            allDevices.Add(new Device()
+                            {
+                                Name = cb.Text,
+                                No = null,
+                                IP = getIP(domain, cb.Text),
+                                StoreId = storeId,
+                            });
+                        }
                     }
-                }
-                foreach (Control ctrl in tlpTxt.Controls)
-                {
-                    if (ctrl.Name.Contains("cbb"))
+                    foreach (string n in multi)
                     {
-                        string n = ctrl.Name.Remove(0, 3);
-                        string ip = getIP(domain, ctrl.Name.Remove(0, 3), ctrl.Text);
-                        ld.Add(new Device()
+                        CheckBox cb = (CheckBox)Controls.Find("cb" + n, true).FirstOrDefault();
+                        ComboBox cbb = (ComboBox)Controls.Find("cbb" + n, true).FirstOrDefault();
+                        if (cb != null && cb.Checked)
                         {
-                            Name = n,
-                            No = ctrl.Text,
-                            IP = ip
-                        });
+                            ld.Add(new Device()
+                            {
+                                Name = cb.Text,
+                                No = cbb.Text,
+                                IP = getIP(domain, cb.Text, cbb.Text),
+                                StoreId=storeId,
+                            });
+                            allDevices.Add(new Device()
+                            {
+                                Name = cb.Text,
+                                No = cbb.Text,
+                                IP = getIP(domain, cb.Text, cbb.Text),
+                                StoreId = storeId,
+                            });
+                        }
                     }
+                    allData.Add(new KeyValuePair<string, List<Device>>(storeId, ld));
                 }
-                allData.Add(new KeyValuePair<string, List<Device>>(storeId, ld));
+                ResultForm rf = new ResultForm(allData, allDevices);
+                rf.Show();
             }
-            ResultForm rf = new ResultForm(allData);
-            rf.Show();
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
 
         private List<string> getStoreIds()
         {
             List<string> storeIds = new List<string>();
-            try
-            {
                 if (cbChooseGroup.Checked)
                 {
                     string storePath = cbSameDir.Checked ? Environment.CurrentDirectory + "/Node.txt" : txtStore.Text;
@@ -284,11 +309,6 @@ namespace Springer
                 {
                     storeIds = txtStore.Text.Split(',').ToList();
                 }
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(exc.Message);
-            }
             return storeIds;
         }
 
@@ -311,11 +331,11 @@ namespace Springer
                 case "PDA":
                     return $"{domain}.13{no}";
                 case "UPS":
-                    return $"{domain}.{96 + no}";
+                    return $"{domain}.{96 + Int32.Parse(no)}";
                 case "EDC":
-                    return $"{domain}.{208 + no}";
+                    return $"{domain}.{208 + Int32.Parse(no)}";
                 case "CCTV":
-                    return $"{domain}.{8 + no}";
+                    return $"{domain}.{8 +  Int32.Parse(no)}";
                 default:
                     return domain + ".110";
             }

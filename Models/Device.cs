@@ -8,6 +8,7 @@ namespace Springer.Models
 {
     public class Device
     {
+        public string StoreId { get; set; }
         public string Name { get; set; }
         public string No { get; set; }
         public string IP { get; set; }
