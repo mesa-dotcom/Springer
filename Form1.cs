@@ -110,25 +110,38 @@ namespace Springer
                         {
                             rr++;
                         }
-                        CheckBox cb = new CheckBox() { Name = "cb" + prop.Name, Text = prop.Name, Checked = true };
-                        cb.CheckedChanged += new EventHandler(deviceCheckbox_CheckedChanged);
-                        tlpTxt.Controls.Add(cb, rc % 6, rr);
+                        tlpTxt.Controls.Add(createCheckBoxForDevice(prop.Name), rc % 6, rr);
                         var lnd = LimitedDeviceNumber.Find(k => k.Key == prop.Name).Value;
-                        RichTextBox rtb = new RichTextBox() { Name = "rtb" + prop.Name, Text = String.Join(",", Enumerable.Range(1, device.Number).ToArray()), Size = new System.Drawing.Size(130, 28), Enabled = false };
-                        tlpTxt.Controls.Add(rtb, rc % 6 + 1, rr);
-                        Button btn = new Button()
-                        {
-                            Name = "btnChoose" + prop.Name,
-                            Text = "...",
-                            Margin = new Padding(0, 2, 0, 0),
-                            Padding = new Padding(0),
-                            Size = new System.Drawing.Size(35, 25),
-                            TextAlign = System.Drawing.ContentAlignment.TopCenter
-                        };
-                        tlpTxt.Controls.Add(btn, rc % 6 + 2, rr);
+                        tlpTxt.Controls.Add(createRichTextBoxForDevice(prop.Name, device.Number), rc % 6 + 1, rr);
+                        tlpTxt.Controls.Add(createButtonForDevice(prop.Name), rc % 6 + 2, rr);
                     }
                 }
             }
+        }
+
+        private CheckBox createCheckBoxForDevice(string propName)
+        {
+            CheckBox cb = new CheckBox() { Name = "cb" + propName, Text = propName, Checked = true };
+            cb.CheckedChanged += new EventHandler(deviceCheckbox_CheckedChanged);
+            return cb;
+        }
+
+        private RichTextBox createRichTextBoxForDevice(string propName, int highValue)
+        {
+            return new RichTextBox() { Name = "rtb" + propName, Text = String.Join(",", Enumerable.Range(1, highValue).ToArray()), Size = new System.Drawing.Size(130, 28), Enabled = false };
+        }
+
+        private Button createButtonForDevice(string propName)
+        {
+            return new Button()
+            {
+                Name = "btnChoose" + propName,
+                Text = "...",
+                Margin = new Padding(0, 2, 0, 0),
+                Padding = new Padding(0),
+                Size = new System.Drawing.Size(35, 25),
+                TextAlign = System.Drawing.ContentAlignment.TopCenter
+            };
         }
 
         private void deviceCheckbox_CheckedChanged(object sender, EventArgs e)
