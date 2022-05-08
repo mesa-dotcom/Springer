@@ -12,7 +12,7 @@ namespace Springer
 {
     public partial class springer : Form
     {
-        string settingPath = Environment.CurrentDirectory + "/setting_secret_key.txt";
+        string settingPath = Environment.CurrentDirectory + "/setting_this_is_secret_file.txt";
         Setting defaultSetting = new Setting();
         Setting currentSetting = new Setting();
         List<KeyValuePair<string, int>> LimitedDeviceNumber = new List<KeyValuePair<string, int>>()
@@ -83,7 +83,7 @@ namespace Springer
 
         private void createForm()
         {
-            var rc = -2;
+            var rc = -3;
             var rr = -1;
             foreach (PropertyInfo prop in currentSetting.GetType().GetProperties())
             {
@@ -105,23 +105,27 @@ namespace Springer
                     MultiSetting device = (MultiSetting) prop.GetValue(currentSetting, null);
                     if (device.IsShow)
                     {
-                        rc += 2;
-                        if (rc % 4 == 0)
+                        rc += 3;
+                        if (rc % 6 == 0)
                         {
                             rr++;
                         }
                         CheckBox cb = new CheckBox() { Name = "cb" + prop.Name, Text = prop.Name, Checked = true };
                         cb.CheckedChanged += new EventHandler(deviceCheckbox_CheckedChanged);
-                        tlpTxt.Controls.Add(cb, rc % 4, rr);
+                        tlpTxt.Controls.Add(cb, rc % 6, rr);
                         var lnd = LimitedDeviceNumber.Find(k => k.Key == prop.Name).Value;
-                        ComboBox cbb = new ComboBox() { Name = "cbb" + prop.Name };
-                        for (int i = 1; i <= lnd; i++)
+                        RichTextBox rtb = new RichTextBox() { Name = "rtb" + prop.Name, Text = String.Join(",", Enumerable.Range(1, device.Number).ToArray()), Size = new System.Drawing.Size(130, 28), Enabled = false };
+                        tlpTxt.Controls.Add(rtb, rc % 6 + 1, rr);
+                        Button btn = new Button()
                         {
-                            cbb.Items.Add(i);
-                        }
-                        cbb.SelectedItem = device.Number;
-                        //NumericUpDown nud = new NumericUpDown() { Name = "txt" + prop.Name, Text = device.number.ToString(), Maximum = LimitedDeviceNumber.Find(k => k.Key == prop.Name).Value };
-                        tlpTxt.Controls.Add(cbb, rc % 4 + 1, rr);
+                            Name = "btnChoose" + prop.Name,
+                            Text = "...",
+                            Margin = new Padding(0, 2, 0, 0),
+                            Padding = new Padding(0),
+                            Size = new System.Drawing.Size(35, 25),
+                            TextAlign = System.Drawing.ContentAlignment.TopCenter
+                        };
+                        tlpTxt.Controls.Add(btn, rc % 6 + 2, rr);
                     }
                 }
             }
@@ -130,7 +134,7 @@ namespace Springer
         private void deviceCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox chkb = (CheckBox) sender;
-            ComboBox cb = Controls.Find("cbb" + chkb.Text, true).FirstOrDefault() as ComboBox;
+            Button cb = (Button)tlpTxt.Controls.Find("btnChoose" + chkb.Text, true).FirstOrDefault();
             cb.Enabled = chkb.Checked;
         }
 
@@ -216,7 +220,7 @@ namespace Springer
             }
             foreach (Control ctrl in tlpTxt.Controls)
             {
-                if (ctrl.Name.Contains("cb") && !ctrl.Name.Contains("cbb"))
+                if (ctrl.Name.Contains("cb"))
                 {
                     CheckBox cb = (CheckBox)ctrl;
                     cb.Checked = false;
@@ -237,7 +241,7 @@ namespace Springer
                     string domain = $"11{storeId.Substring(0, 1)}.1{storeId.Substring(1, 2)}.1{storeId.Substring(3, 2)}";
                     foreach (string n in uniques)
                     {
-                        CheckBox cb = (CheckBox)Controls.Find("cb" + n, true).FirstOrDefault();
+                        CheckBox cb = (CheckBox)flpCheckboxes.Controls.Find("cb" + n, true).FirstOrDefault();
                         if (cb != null && cb.Checked)
                         {
                             ld.Add(new Device()
@@ -259,22 +263,26 @@ namespace Springer
                     foreach (string n in multi)
                     {
                         CheckBox cb = (CheckBox)Controls.Find("cb" + n, true).FirstOrDefault();
-                        ComboBox cbb = (ComboBox)Controls.Find("cbb" + n, true).FirstOrDefault();
+                        RichTextBox rtb = (RichTextBox)tlpTxt.Controls.Find("rtb" + n, true).FirstOrDefault();
                         if (cb != null && cb.Checked)
                         {
-                            ld.Add(new Device()
+                            List<string> ds = rtb.Text.Split(',').ToList();
+                            ds.ForEach(d =>
                             {
-                                Name = cb.Text,
-                                No = cbb.Text,
-                                IP = getIP(domain, cb.Text, cbb.Text),
-                                StoreId=storeId,
-                            });
-                            allDevices.Add(new Device()
-                            {
-                                Name = cb.Text,
-                                No = cbb.Text,
-                                IP = getIP(domain, cb.Text, cbb.Text),
-                                StoreId = storeId,
+                                ld.Add(new Device()
+                                {
+                                    Name = cb.Text,
+                                    No = d,
+                                    IP = getIP(domain, cb.Text, d),
+                                    StoreId = storeId,
+                                });
+                                allDevices.Add(new Device()
+                                {
+                                    Name = cb.Text,
+                                    No = d,
+                                    IP = getIP(domain, cb.Text, d),
+                                    StoreId = storeId
+                                }); ;
                             });
                         }
                     }
