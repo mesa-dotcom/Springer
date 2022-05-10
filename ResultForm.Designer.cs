@@ -32,6 +32,7 @@
             this.lblProgress = new System.Windows.Forms.Label();
             this.btnExcel = new System.Windows.Forms.Button();
             this.dgwResult = new System.Windows.Forms.DataGridView();
+            this.btnCSV = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgwResult)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,7 +57,8 @@
             // 
             this.btnExcel.AutoSize = true;
             this.btnExcel.Enabled = false;
-            this.btnExcel.Location = new System.Drawing.Point(300, 498);
+            this.btnExcel.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcel.Location = new System.Drawing.Point(456, 498);
             this.btnExcel.Name = "btnExcel";
             this.btnExcel.Size = new System.Drawing.Size(153, 35);
             this.btnExcel.TabIndex = 2;
@@ -80,11 +82,25 @@
             this.dgwResult.TabIndex = 3;
             this.dgwResult.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgwResult_CellFormatting);
             // 
+            // btnCSV
+            // 
+            this.btnCSV.AutoSize = true;
+            this.btnCSV.Enabled = false;
+            this.btnCSV.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCSV.Location = new System.Drawing.Point(151, 498);
+            this.btnCSV.Name = "btnCSV";
+            this.btnCSV.Size = new System.Drawing.Size(153, 35);
+            this.btnCSV.TabIndex = 4;
+            this.btnCSV.Text = "Export CSV";
+            this.btnCSV.UseVisualStyleBackColor = true;
+            this.btnCSV.Click += new System.EventHandler(this.btnCSV_Click);
+            // 
             // ResultForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 543);
+            this.Controls.Add(this.btnCSV);
             this.Controls.Add(this.dgwResult);
             this.Controls.Add(this.btnExcel);
             this.Controls.Add(this.lblProgress);
@@ -107,5 +123,6 @@
         private System.Windows.Forms.Label lblProgress;
         private System.Windows.Forms.Button btnExcel;
         private System.Windows.Forms.DataGridView dgwResult;
+        private System.Windows.Forms.Button btnCSV;
     }
 }

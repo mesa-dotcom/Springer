@@ -11,6 +11,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.Excel;
+using System.IO;
+using System.Diagnostics;
 
 namespace Springer
 {
@@ -54,7 +56,7 @@ namespace Springer
                     if (gw != null)
                     {
                         gw.IsAlive = true;
-                        AddRowToDT(gw);
+                        AddRowToDT(gw, gwIpRes.stati);
                         devices.Remove(gw);
                     }
                     for (int i = 0; i < devices.Count(); i++)
@@ -117,6 +119,7 @@ namespace Springer
             if (pgbResult.Value == pgbResult.Maximum)
             {
                 btnExcel.Enabled = true;
+                btnCSV.Enabled = true;
                 lblProgress.Text = "Pinging is Done!";
                 SetSort(true);
             }
@@ -150,6 +153,27 @@ namespace Springer
             Workbook wb = Excell.Workbooks.Add(XlSheetType.xlWorksheet);
             Worksheet ws = (Worksheet)Excell.ActiveSheet;
             Excell.Visible = true;
+        }
+
+        private void btnCSV_Click(object sender, EventArgs e)
+        {
+            using (TextWriter tw = new StreamWriter("result.txt"))
+            {
+                for (int i = 0; i < dgwResult.Rows.Count; i++)
+                {
+                    for (int j = 0; j < dgwResult.Columns.Count - 1; j++)
+                    {
+                        tw.Write($"{dgwResult.Rows[i].Cells[j].Value}");
+
+                        if (j != dgwResult.Columns.Count - 2)
+                        {
+                            tw.Write("|");
+                        }
+                    }
+                    tw.WriteLine();
+                }
+                Process.Start("notepad.exe", Environment.CurrentDirectory + "\\result.txt");
+            }
         }
     }
 }

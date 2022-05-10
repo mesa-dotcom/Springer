@@ -52,7 +52,7 @@
             this.tlpDevices.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tlpDevices.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tlpDevices.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tlpDevices.Location = new System.Drawing.Point(12, 50);
+            this.tlpDevices.Location = new System.Drawing.Point(12, 47);
             this.tlpDevices.Name = "tlpDevices";
             this.tlpDevices.RowCount = 3;
             this.tlpDevices.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
