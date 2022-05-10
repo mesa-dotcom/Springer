@@ -16,7 +16,7 @@ namespace Springer
 {
     public partial class SettingForm : Form
     {
-        string settingPath = Environment.CurrentDirectory + "/setting_secret_key.txt";
+        string settingPath = Environment.CurrentDirectory + "/setting_this_is_secret_file.txt";
         Setting setting = new Setting();
         List<string> uniques = new List<string>() { "SC", "GW", "Printer", "GOT" };
         public SettingForm()
@@ -96,7 +96,7 @@ namespace Springer
                     fs.Write(data, 0, data.Length);
                     File.SetAttributes(settingPath, FileAttributes.Hidden);
                 }
-                this.Close();
+                Close();
             }
             catch (Exception)
             {

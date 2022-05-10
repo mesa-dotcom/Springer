@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Office.Interop.Excel;
 
 namespace Springer
 {
@@ -18,8 +19,8 @@ namespace Springer
         Ping pinger = new Ping();
         List<KeyValuePair<string, List<Device>>> dataByStore = new List<KeyValuePair<string, List<Device>>>();
         List<Device> dataAll = new List<Device>();
-        DataTable dt = new DataTable();
-        int QualifiedSuccess = 2;
+        System.Data.DataTable dt = new System.Data.DataTable();
+        int QualifiedSuccess = 3;
         public ResultForm(List<KeyValuePair<string, List<Device>>> d, List<Device> ds)
         {
             dataByStore = d;
@@ -35,7 +36,9 @@ namespace Springer
             dt.Columns.Add("No");
             dt.Columns.Add("IP Address");
             dt.Columns.Add("Status");
+            dt.Columns.Add("Status All");
             dgwResult.DataSource = dt;
+            SetSort(false);
         }
         private async void startPing()
         {
@@ -61,34 +64,38 @@ namespace Springer
                         {
                             devices[i].IsAlive = true;
                         }
-                        AddRowToDT(devices[i]);
+                        AddRowToDT(devices[i], dRes.stati);
                     }
                 }
                 else
                 {
                     devices.ForEach(d =>
                     {
-                        AddRowToDT(d);
+                        AddRowToDT(d, new List<string>() { "Timeout", "Timeout", "Timeout", "Timeout"});
                     });
                 }
 
             }
         }
 
-        private void AddRowToDT(Device d)
+        private void AddRowToDT(Device d, List<string> stati = null) 
         {
             DataRow dr = dt.NewRow();
             dr["Store ID"] = d.StoreId;
             dr["Device"] = d.Name;
             dr["No"] = d.No ?? "-";
             dr["IP Address"] = d.IP;
-            dr["Status"] = d.IsAlive ? "Success" : "Timeout";
+            dr["Status"] = d.IsAlive ? "Success" : "Failed";
+            if (stati != null)
+            {
+                dr["Status All"] = String.Join(", ", stati);
+            }
             dt.Rows.Add(dr);
             pgbResult.Increment(1);
             CheckProgressBarFull();
         }
 
-        private async Task<(bool isSuccess, int index)> PingIp(string ip, int index = 0)
+        private async Task<(bool isSuccess, int index, List<string> stati)> PingIp(string ip, int index = 0)
         {
             List<string> results = new List<string>();
             for (int i = 0; i < 4; i++)
@@ -96,8 +103,8 @@ namespace Springer
                 PingReply prl = await pinger.SendPingAsync(ip);
                 results.Add(prl.Status.ToString());
             }
-            int s = results.Where(S => S.Equals("Success")).Count();
-            return  (s > QualifiedSuccess, index);
+            int s = results.Where(r => r.Equals("Success")).Count();
+            return  (s >= QualifiedSuccess, index, results);
         }
 
         private void ResultForm_Load(object sender, EventArgs e)
@@ -111,6 +118,7 @@ namespace Springer
             {
                 btnExcel.Enabled = true;
                 lblProgress.Text = "Pinging is Done!";
+                SetSort(true);
             }
         }
 
@@ -121,11 +129,27 @@ namespace Springer
                 if (e.Value.ToString() == "Success")
                 {
                     e.CellStyle.ForeColor = Color.Green;  
-                } else if (e.Value.ToString() == "Timeout")
+                } else if (e.Value.ToString() == "Failed")
                 {
                     e.CellStyle.ForeColor = Color.Red;  
                 }
             }
+        }
+
+        private void SetSort(bool isAllow)
+        {
+            foreach (DataGridViewColumn column in dgwResult.Columns)
+            {
+                column.SortMode =isAllow ? DataGridViewColumnSortMode.Automatic : DataGridViewColumnSortMode.NotSortable;
+            }
+        }
+
+        private void btnExcel_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Excel.Application Excell = new Microsoft.Office.Interop.Excel.Application();
+            Workbook wb = Excell.Workbooks.Add(XlSheetType.xlWorksheet);
+            Worksheet ws = (Worksheet)Excell.ActiveSheet;
+            Excell.Visible = true;
         }
     }
 }

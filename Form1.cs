@@ -111,7 +111,6 @@ namespace Springer
                             rr++;
                         }
                         tlpTxt.Controls.Add(createCheckBoxForDevice(prop.Name), rc % 6, rr);
-                        var lnd = LimitedDeviceNumber.Find(k => k.Key == prop.Name).Value;
                         tlpTxt.Controls.Add(createRichTextBoxForDevice(prop.Name, device.Number), rc % 6 + 1, rr);
                         tlpTxt.Controls.Add(createButtonForDevice(prop.Name), rc % 6 + 2, rr);
                     }
@@ -133,7 +132,7 @@ namespace Springer
 
         private Button createButtonForDevice(string propName)
         {
-            return new Button()
+            Button btn = new Button()
             {
                 Name = "btnChoose" + propName,
                 Text = "...",
@@ -142,6 +141,8 @@ namespace Springer
                 Size = new System.Drawing.Size(35, 25),
                 TextAlign = System.Drawing.ContentAlignment.TopCenter
             };
+            btn.Click += new EventHandler(deviceMore_Click);
+            return btn;
         }
 
         private void deviceCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -149,6 +150,20 @@ namespace Springer
             CheckBox chkb = (CheckBox) sender;
             Button cb = (Button)tlpTxt.Controls.Find("btnChoose" + chkb.Text, true).FirstOrDefault();
             cb.Enabled = chkb.Checked;
+        }
+
+        private void deviceMore_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+
+            var lnd = LimitedDeviceNumber.Find(k => k.Key == btn.Name.Substring(9)).Value;
+            RichTextBox rtb = (RichTextBox)tlpTxt.Controls.Find("rtb" + btn.Name.Substring(9), true).FirstOrDefault();
+            MultiDeviceForm mdf = new MultiDeviceForm(btn.Name.Substring(9),rtb.Text, lnd);
+            mdf.ShowDialog();
+            if (mdf.newChosen != "")
+            {
+                rtb.Text = mdf.newChosen;
+            }
         }
 
         private void cbChooseGroup_CheckedChanged(object sender, EventArgs e)
@@ -210,8 +225,6 @@ namespace Springer
 
         private void settingForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            cbChooseGroup.Checked = true;
-            cbSameDir.Checked = false;
             txtStore.Enabled = false;
             btnBrowse.Enabled = true;
             readSettingFile();
@@ -222,7 +235,6 @@ namespace Springer
 
         private void btnClearForm_Click(object sender, EventArgs e)
         {
-            cbSameDir.Checked = false;
             foreach (Control ctrl in flpCheckboxes.Controls)
             {
                 if (ctrl.Name.Contains("cb"))
@@ -301,8 +313,14 @@ namespace Springer
                     }
                     allData.Add(new KeyValuePair<string, List<Device>>(storeId, ld));
                 }
-                ResultForm rf = new ResultForm(allData, allDevices);
-                rf.ShowDialog();
+                if (allDevices.Count == 0)
+                {
+                    throw new Exception("No device is selected.!");
+                } else
+                {
+                    ResultForm rf = new ResultForm(allData, allDevices);
+                    rf.ShowDialog();
+                }
             }
             catch (Exception exc)
             {
@@ -326,8 +344,16 @@ namespace Springer
                 }
                 else
                 {
+                    if (txtStore.Text == "")
+                    {
+                        throw new Exception("Store ID is empty");
+                    }
                     storeIds = txtStore.Text.Split(',').ToList();
                 }
+            if (storeIds.Count == 0)
+            {
+                throw new Exception("Store ID is empty");
+            }
             return storeIds;
         }
 

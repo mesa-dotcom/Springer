@@ -71,9 +71,9 @@
             this.cbSameDir.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbSameDir.Location = new System.Drawing.Point(168, 31);
             this.cbSameDir.Name = "cbSameDir";
-            this.cbSameDir.Size = new System.Drawing.Size(206, 23);
+            this.cbSameDir.Size = new System.Drawing.Size(210, 23);
             this.cbSameDir.TabIndex = 3;
-            this.cbSameDir.Text = "Same directory (node.txt)";
+            this.cbSameDir.Text = "Same directory (Node.txt)";
             this.cbSameDir.UseVisualStyleBackColor = true;
             this.cbSameDir.CheckedChanged += new System.EventHandler(this.cbSameDir_CheckedChanged);
             // 
@@ -167,7 +167,7 @@
             // 
             this.lblApp.AutoSize = true;
             this.lblApp.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblApp.Location = new System.Drawing.Point(100, 16);
+            this.lblApp.Location = new System.Drawing.Point(116, 16);
             this.lblApp.Name = "lblApp";
             this.lblApp.Size = new System.Drawing.Size(99, 25);
             this.lblApp.TabIndex = 4;
@@ -177,7 +177,7 @@
             // 
             this.lblSlogan.AutoSize = true;
             this.lblSlogan.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSlogan.Location = new System.Drawing.Point(101, 51);
+            this.lblSlogan.Location = new System.Drawing.Point(117, 51);
             this.lblSlogan.Name = "lblSlogan";
             this.lblSlogan.Size = new System.Drawing.Size(175, 19);
             this.lblSlogan.TabIndex = 5;
