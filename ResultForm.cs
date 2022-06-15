@@ -49,7 +49,8 @@ namespace Springer
             {
                 var storeId = store.Key;
                 var devices = store.Value;
-                var gwIpRes = await PingIp($"11{storeId.Substring(0, 1)}.1{storeId.Substring(1, 2)}.1{storeId.Substring(3, 2)}.110");
+                var firstDigit = storeId.Substring(0, 1) == "0" ? "7" : storeId.Substring(0, 1);
+                var gwIpRes = await PingIp($"11{firstDigit}.1{storeId.Substring(1, 2)}.1{storeId.Substring(3, 2)}.110");
                 if (gwIpRes.isSuccess)
                 {
                     Device gw = devices.Find(D => D.Name == "GW");
