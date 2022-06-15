@@ -31,6 +31,7 @@ namespace Springer
         List<string> uniques = new List<string>() { "GW", "SC", "Printer", "GOT" };
         List<string> multi = new List<string>() { "POS", "AP", "PDA", "CCTV", "EDC", "UPS" };
         string[] stores;
+        bool isWatching = false;
         public springer()
         {
             InitializeComponent();
@@ -354,6 +355,9 @@ namespace Springer
             if (storeIds.Count == 0)
             {
                 throw new Exception("Store ID is empty");
+            } else if (storeIds.Count > 1 && isWatching)
+            {
+                throw new Exception("Watching mode only allows one store.");
             }
             return storeIds;
         }
@@ -385,6 +389,11 @@ namespace Springer
                 default:
                     return domain + ".110";
             }
+        }
+
+        private void cbWatching_CheckedChanged(object sender, EventArgs e)
+        {
+            isWatching = cbWatching.Checked;
         }
     }
 }

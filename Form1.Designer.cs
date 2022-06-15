@@ -45,6 +45,7 @@
             this.btnSetting = new System.Windows.Forms.Button();
             this.btnClearForm = new System.Windows.Forms.Button();
             this.btnPing = new System.Windows.Forms.Button();
+            this.cbWatching = new System.Windows.Forms.CheckBox();
             this.gbStore.SuspendLayout();
             this.gbDevices.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbApp)).BeginInit();
@@ -224,11 +225,23 @@
             this.btnPing.UseVisualStyleBackColor = true;
             this.btnPing.Click += new System.EventHandler(this.btnPing_Click);
             // 
+            // cbWatching
+            // 
+            this.cbWatching.AutoSize = true;
+            this.cbWatching.Location = new System.Drawing.Point(664, 90);
+            this.cbWatching.Name = "cbWatching";
+            this.cbWatching.Size = new System.Drawing.Size(123, 20);
+            this.cbWatching.TabIndex = 8;
+            this.cbWatching.Text = "Watching Mode";
+            this.cbWatching.UseVisualStyleBackColor = true;
+            this.cbWatching.CheckedChanged += new System.EventHandler(this.cbWatching_CheckedChanged);
+            // 
             // springer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(799, 586);
+            this.Controls.Add(this.cbWatching);
             this.Controls.Add(this.btnPing);
             this.Controls.Add(this.btnClearForm);
             this.Controls.Add(this.lblSlogan);
@@ -270,6 +283,7 @@
         private System.Windows.Forms.CheckBox cbSameDir;
         private System.Windows.Forms.Button btnClearForm;
         private System.Windows.Forms.Button btnPing;
+        private System.Windows.Forms.CheckBox cbWatching;
     }
 }
 
