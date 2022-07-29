@@ -318,7 +318,12 @@ namespace Springer
                 if (allDevices.Count == 0)
                 {
                     throw new Exception("No device is selected.!");
-                } else
+                } else if (isWatching)
+                {
+                    ResultFormWatching rfw = new ResultFormWatching(allDevices);
+                    rfw.ShowDialog();
+                }
+                else
                 {
                     ResultForm rf = new ResultForm(allData, allDevices);
                     rf.ShowDialog();
