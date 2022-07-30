@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResultFormWatching));
             this.lblMain = new System.Windows.Forms.Label();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // lblMain
@@ -60,6 +61,10 @@
             this.tlpMain.Size = new System.Drawing.Size(690, 430);
             this.tlpMain.TabIndex = 1;
             // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            // 
             // ResultFormWatching
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -82,5 +87,6 @@
 
         private System.Windows.Forms.Label lblMain;
         private System.Windows.Forms.TableLayoutPanel tlpMain;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
